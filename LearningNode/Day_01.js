@@ -8,6 +8,7 @@ const fs = require("fs");
 // Example of built in node module fs(file system)
 // you can use the module using two method 1.callback 2.promises
 // in this example we used callback method
+
 const filePath = "example.txt";
 const dataToWrite = "hello i writing successfully";
 
