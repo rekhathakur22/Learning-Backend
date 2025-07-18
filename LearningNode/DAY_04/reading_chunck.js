@@ -33,6 +33,7 @@ const server = http.createServer((req, res) => {
     res.write(
       '<input type="text" name ="username" placeholder="UserName"></br>'
     );
+
     res.write('<input type="email" name="email" placeholder="UserEmail"><br>');
     res.write(
       '<input type="text" name="contact-number" placeholder="Contact Number"><br>'
