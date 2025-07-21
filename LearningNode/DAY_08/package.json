@@ -1,0 +1,19 @@
+{
+  "name": "day_08",
+  "version": "1.0.0",
+  "description": "hyy",
+  "license": "ISC",
+  "author": "rekha",
+  "type": "commonjs",
+  "main": "01_server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"nodemon 01_server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
