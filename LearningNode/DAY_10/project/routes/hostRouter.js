@@ -1,13 +1,26 @@
-const path = require("path");
+// external module
 const express = require("express");
+
+// using express routing
 const hostRouter = express.Router();
 
+// if user comes of add-home page
 hostRouter.get("/add-home", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "views", "add-home.html"));
+  res.render("add-home");
 });
 
+// store registered homes
+const registeredHome = [];
+
+// user submit the data
 hostRouter.post("/add-home", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "views", "homeAdded.html"));
+  console.log("home registered: ", req.body);
+  registeredHome.push(req.body);
+  console.log(registeredHome);
+  res.render("homeAdded");
 });
 
-module.exports = hostRouter;
+// exporting more then one modules
+// at destination destructure this module using
+exports.hostRouter = hostRouter;
+exports.registeredHome = registeredHome;

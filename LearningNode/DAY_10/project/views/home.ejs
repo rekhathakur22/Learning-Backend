@@ -1,0 +1,65 @@
+
+<!-- home page ejs -->
+
+<!-- working with partials -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roomly</title>
+   <link href="./output.css" rel="stylesheet">
+</head>
+
+<!-- body page -->
+<body>
+  
+  <%- include('./partials/header')%>
+
+   <!-- Main content of the page -->
+  <main class=" flex flex-col items-center justify-center pt-12 px-4">
+
+    <h1 class="text-4xl font-bold text-amber-600 mb-8">Welcome to Home Page</h1> 
+    <a
+      href="/host/add-home"
+      class="inline-block mb-8 bg-amber-400 text-white px-6 py-2 rounded-lg text-lg hover:bg-amber-700 transition duration-300"
+    >
+      Add Home
+    </a>
+    
+
+   <ul class="w-full max-w-md space-y-3 flex">
+    <% if (registeredHome.length === 0) { %>
+      <li class="text-gray-600 text-center">No homes registered yet.</li>
+    <% } else { %>
+      <% registeredHome.forEach((home) => { %>
+        <li class="bg-white p-4 rounded-lg shadow flex justify-between items-center">
+          <div class="max-w-sm mx-auto bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+          <img class="w-full h-48 object-cover" src= <%= home.img %>  alt="Card Image">
+  
+  <div class="p-4">
+    <h2 class="text-xl font-semibold text-gray-800 mb-2"><%= home.homename %></h2>
+    <p class="text-gray-600 text-sm mb-4">
+      <%= home.price %>
+    </p>
+    <p class="text-gray-600 text-sm mb-4">
+      <%= home.location %>
+    </p>
+    <button class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-xl transition-all">
+      Learn More
+    </button>
+  </div>
+</div>
+
+        </li>
+        
+      <% }); %>
+    <% } %>
+  </ul>
+  </main>
+  
+
+
+ 
+</body>
+</html>
