@@ -1,7 +1,7 @@
 const Home = require("../models/homes");
 
 exports.getAddHome = (req, res) => {
-  res.render("add-home");
+  res.render("host/add-home");
 };
 
 exports.postAddHome = (req, res) => {
@@ -13,11 +13,11 @@ exports.postAddHome = (req, res) => {
   );
   home.save();
 
-  res.render("homeAdded");
+  res.render("host/homeAdded");
 };
 
 exports.getHome = (req, res) => {
   Home.fetchAll((registeredHome) => {
-    res.render("home", { registeredHome });
+    res.render("store/landingPage", { registeredHome });
   });
 };

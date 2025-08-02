@@ -1,0 +1,38 @@
+
+<!-- home page ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roomly</title>
+   <link href="./output.css" rel="stylesheet">
+</head>
+
+<!-- body page -->
+<body >
+
+  <!-- navigation  -->
+  
+  <%- include('../partials/header')%> 
+
+  <!-- Hero Section -->
+<section class="bg-gray-100 text-white text-center px-6 py-4">
+    <%- include('../partials/heroSection')%> 
+</section>
+
+  <!-- ✅ Home Listings -->
+  <main id="listings" class="px-6 py-4">
+    <h3 class="text-blue-600 text-2xl font-bold mb-4 text-center">Available Homes</h3>
+    <div class="flex flex-col space-y-4">
+      <% registeredHome.forEach(home => { %>
+       <%- include('../partials/card',{ home: home })%> 
+       <% }) %>
+    </div>
+  </main>
+  
+    <%- include('../partials/footer')%> 
+ 
+</body>
+</html>
