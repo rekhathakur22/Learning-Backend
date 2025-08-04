@@ -2,10 +2,12 @@
 const express = require("express");
 const userRouter = express.Router();
 
-const homeController = require("../controllers/home");
+const storeController = require("../controllers/storeController");
 
 // from controller
-userRouter.get("/", homeController.getHome);
+userRouter.get("/", storeController.getHome);
+userRouter.get("/booking", storeController.getBooking);
+userRouter.get("/favourite", storeController.getFavourite);
 
 // export
 module.exports = userRouter;

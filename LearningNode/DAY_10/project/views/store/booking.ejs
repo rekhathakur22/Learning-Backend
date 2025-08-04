@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booked Homes</title>
+  <link rel="stylesheet" href="./output.css" />
+</head>
+<body class="bg-green-50 text-gray-800">
+ <%- include('../partials/header')%> 
+  <!-- Header -->
+  <header class="bg-blue-500 text-white p-4 shadow-md">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Booked Homes</h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto p-8">
+    <h2 class="text-xl font-semibold mb-6">Your Bookings</h2>
+
+    <!-- Homes Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Home Card -->
+      <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md">
+        <img src="https://via.placeholder.com/400x200" alt="Home Image" class="w-full h-48 object-cover" />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold mb-2">Mountain View Villa</h3>
+          <p class="text-sm text-gray-600 mb-1">📍 Shimla, Himachal Pradesh</p>
+          <p class="text-sm text-gray-600 mb-2">Dates: 10 Aug - 15 Aug</p>
+          <p class="text-red-700 font-medium">₹4000/night</p>
+        </div>
+      </div>
+
+      <!-- Copy and paste this block for more cards -->
+      <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md">
+        <img src="https://via.placeholder.com/400x200" alt="Home Image" class="w-full h-48 object-cover" />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold mb-2">Beach Retreat</h3>
+          <p class="text-sm text-gray-600 mb-1">📍 Goa</p>
+          <p class="text-sm text-gray-600 mb-2">Dates: 20 Aug - 25 Aug</p>
+          <p class="text-red-700 font-medium">₹5500/night</p>
+        </div>
+      </div>
+
+      <!-- Add more homes here as needed -->
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 text-center text-sm p-4 mt-10 text-gray-600">
+    &copy; 2025 Roomly. All rights reserved.
+  </footer>
+
+</body>
+</html>

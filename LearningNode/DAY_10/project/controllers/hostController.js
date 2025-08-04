@@ -4,6 +4,10 @@ exports.getAddHome = (req, res) => {
   res.render("host/add-home");
 };
 
+exports.getHostHome = (req, res) => {
+  res.render("host/host-home");
+};
+
 exports.postAddHome = (req, res) => {
   const home = new Home(
     req.body.homename,
@@ -14,10 +18,4 @@ exports.postAddHome = (req, res) => {
   home.save();
 
   res.render("host/homeAdded");
-};
-
-exports.getHome = (req, res) => {
-  Home.fetchAll((registeredHome) => {
-    res.render("store/landingPage", { registeredHome });
-  });
 };
