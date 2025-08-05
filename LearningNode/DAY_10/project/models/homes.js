@@ -11,10 +11,11 @@ module.exports = class Home {
   }
 
   save() {
+    this.id = Math.random().toString();
     Home.fetchAll((registeredHome) => {
       registeredHome.push(this);
       const filePath = path.join(__dirname, "..", "data", "home.json");
-      console.log(filePath);
+
       fs.writeFile(filePath, JSON.stringify(registeredHome), (err) => {
         console.log("save", err);
       });
