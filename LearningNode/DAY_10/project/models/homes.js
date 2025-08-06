@@ -1,7 +1,7 @@
 // core modules
 const fs = require("fs");
 const path = require("path");
-
+const filePath = path.join(__dirname, "..", "data", "home.json");
 module.exports = class Home {
   constructor(homename, price, location, img) {
     this.homename = homename;
@@ -14,7 +14,6 @@ module.exports = class Home {
     this.id = Math.random().toString();
     Home.fetchAll((registeredHome) => {
       registeredHome.push(this);
-      const filePath = path.join(__dirname, "..", "data", "home.json");
 
       fs.writeFile(filePath, JSON.stringify(registeredHome), (err) => {
         console.log("save", err);
@@ -23,9 +22,14 @@ module.exports = class Home {
   }
 
   static fetchAll(callback) {
-    const filePath = path.join(__dirname, "..", "data", "home.json");
     fs.readFile(filePath, (err, data) => {
       callback(!err ? JSON.parse(data) : []);
+    });
+  }
+
+  static findById(homeId, callback) {
+    this.fetchAll((homes) => {
+      homes.find(() => {});
     });
   }
 };

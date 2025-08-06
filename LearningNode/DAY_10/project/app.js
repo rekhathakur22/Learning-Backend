@@ -14,6 +14,9 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "views"); // Setting the Views Directory:
 
+// it making the static files like accessible
+app.use(express.static(path.join(__dirname, "public")));
+
 // middlewares
 
 // user page
@@ -23,8 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // url management
 app.use("/host", hostRouter);
-// it making the static files like accessible
-app.use(express.static(path.join(__dirname, "public")));
 
 // erro page middleware
 app.use((req, res, next) => {
