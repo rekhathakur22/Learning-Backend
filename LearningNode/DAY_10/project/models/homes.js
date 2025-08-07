@@ -29,7 +29,10 @@ module.exports = class Home {
 
   static findById(homeId, callback) {
     this.fetchAll((homes) => {
-      homes.find(() => {});
+      const homeFound = homes.find((home) => {
+        return home.id === homeId;
+      });
+      callback(homeFound);
     });
   }
 };

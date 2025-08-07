@@ -16,6 +16,18 @@ exports.getFavourite = (req, res) => {
 
 exports.getHomeDetail = (req, res) => {
   const homeId = req.params.homeId;
-  console.log("at home details page", homeId);
-  res.render("store/homeDetail");
+
+  Home.findById(homeId, (home) => {
+    if (!home) {
+      res.redirect("/");
+    } else {
+      res.render("store/homeDetail", {
+        id: home.id,
+        homename: home.homename,
+        price: home.price,
+        location: home.location,
+        img: home.img,
+      });
+    }
+  });
 };
