@@ -8,6 +8,7 @@ const storeController = require("../controllers/storeController");
 userRouter.get("/", storeController.getHome);
 userRouter.get("/booking", storeController.getBooking);
 userRouter.get("/favourite", storeController.getFavourite);
+userRouter.post("/favourite", storeController.postAddFavourite);
 userRouter.get("/:homeId", storeController.getHomeDetail);
 
 // export

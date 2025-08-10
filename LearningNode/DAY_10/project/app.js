@@ -16,13 +16,13 @@ app.set("views", "views"); // Setting the Views Directory:
 
 // it making the static files like accessible
 app.use(express.static(path.join(__dirname, "public")));
+// parse the body
+app.use(express.urlencoded({ extended: true }));
 
 // middlewares
 
 // user page
 app.use(userRouter);
-// parse the body
-app.use(express.urlencoded({ extended: true }));
 
 // url management
 app.use("/host", hostRouter);
