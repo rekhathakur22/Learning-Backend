@@ -4,9 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Host home list items</title>
+  <link rel="stylesheet" href="/output.css">
  
 </head>
 <body>
-   <h1>Please add new Homes</h1>
+  
+   <%- include('../partials/header')%> 
+
+  <main id="listings" class="px-6 py-4">
+    <h3 class="text-blue-600 text-2xl font-bold mb-4 text-center">Available Homes</h3>
+    <div class="flex flex-col space-y-4">
+      <% registeredHome.forEach(home => { %>
+       <%- include('../partials/host-home-card',{ home: home })%> 
+       <% }) %>
+    </div>
+  </main>
+
 </body>
 </html>
