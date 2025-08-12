@@ -7,7 +7,9 @@
          <div class="flex mt-3">
            <a href="/" class="bg-blue-600 py-2 text-center  text-white px-15 mx-2">Detail</a>
            <a href="/host/edit-home/<%= home.id%>" class="bg-blue-600 py-2 text-center  text-white px-15 mx-2">Edit</a>
-           <a href="/" class="bg-blue-600 py-2 text-center  text-white px-15 mx-2">Delete</a>
+           <form action="/host/delete-home/<%= home.id%>" method="POST">
+            <button type="submit" class="bg-blue-600 py-2 text-center  text-white px-15 mx-2">Delete</button>
+           </form>
          </div>
         </div>
         <img src="<%= home.img %>" alt="Home 1" class="w-2/5 h-48 object-cover rounded-md">

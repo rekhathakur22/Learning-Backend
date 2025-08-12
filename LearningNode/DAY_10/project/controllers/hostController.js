@@ -22,6 +22,27 @@ exports.getHostHome = (req, res) => {
   });
 };
 
+exports.postDeleteHome = (req, res) => {
+  const homeId = req.params.homeId;
+  console.log("came to delete home", homeId);
+  Home.deleteById(homeId, (error) => {
+    if (error) {
+      console.log("error is occured", error);
+    } else {
+      res.redirect("/host/host-home");
+    }
+  });
+};
+
+exports.postEditHome = (req, res) => {
+  const { homeId, homename, price, location, img } = req.body;
+  const home = new Home(homename, price, location, img);
+  home.id = homeId;
+  console.log(homeId);
+  home.save();
+  res.redirect("/host/host-home");
+};
+
 exports.postAddHome = (req, res) => {
   const home = new Home(
     req.body.homename,

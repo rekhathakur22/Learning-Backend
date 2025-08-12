@@ -51,3 +51,15 @@ exports.getHomeDetail = (req, res) => {
     }
   });
 };
+
+exports.deleteFavourite = (req, res) => {
+  const homeId = req.params.homeId;
+  console.log("came to delete home", homeId);
+  Favourite.deleteFavouriteById(homeId, (error) => {
+    if (error) {
+      console.log("error is occured", error);
+    } else {
+      res.redirect("/favourite");
+    }
+  });
+};

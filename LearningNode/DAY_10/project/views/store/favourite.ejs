@@ -29,6 +29,14 @@
          <div class="flex mt-3">
            <a href="/<%-home.id%>" class="bg-blue-600 py-2 text-center mx-3 text-white px-15">Detail</a>
            <a href="/<%-home.id%>" class="bg-blue-600 py-2 text-center  text-white px-15">Book</a>
+           <form action="/delete-favourite/<%-home.id%>" method="POST">
+           <button
+           type="submit"
+           class="mx-5 px-6 bg-red-600 hover:bg-red-700 text-white font-medium py-2 transition duration-300"
+           >
+           delete
+           </button>
+           </form>
          </div>
         </div>
         <img src="<%-home.img %>" alt="Home 1" class="w-2/5 h-48 object-cover rounded-md">

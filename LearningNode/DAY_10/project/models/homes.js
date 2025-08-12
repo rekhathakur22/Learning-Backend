@@ -1,6 +1,7 @@
 // core modules
 const fs = require("fs");
 const path = require("path");
+const Favourite = require("./favourite");
 const filePath = path.join(__dirname, "..", "data", "home.json");
 module.exports = class Home {
   constructor(homename, price, location, img) {
@@ -11,9 +12,20 @@ module.exports = class Home {
   }
 
   save() {
-    this.id = Math.random().toString();
+    const currentHome = this;
+
     Home.fetchAll((registeredHome) => {
-      registeredHome.push(this);
+      if (currentHome.id) {
+        registeredHome = registeredHome.map((home) => {
+          if (home.id === currentHome.id) {
+            return currentHome;
+          }
+          return home;
+        });
+      } else {
+        currentHome.id = Math.random().toString();
+        registeredHome.push(currentHome);
+      }
 
       fs.writeFile(filePath, JSON.stringify(registeredHome), (err) => {
         console.log("save", err);
@@ -33,6 +45,14 @@ module.exports = class Home {
         return home.id === homeId;
       });
       callback(homeFound);
+    });
+  }
+
+  static deleteById(homeId, callback) {
+    this.fetchAll((homes) => {
+      homes = homes.filter((home) => home.id !== homeId);
+      Favourite.deleteFavouriteById(homeId, callback);
+      fs.writeFile(filePath, JSON.stringify(homes), callback);
     });
   }
 };
