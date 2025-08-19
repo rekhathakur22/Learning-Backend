@@ -7,15 +7,6 @@ const express = require("express");
 // Local module
 const userRouter = require("./routes/userRouter");
 const { hostRouter } = require("./routes/hostRouter");
-const db = require("./utils/database");
-
-db.execute("SELECT * FROM homes")
-  .then(([rows, fields]) => {
-    console.log("getting form db", rows);
-  })
-  .catch((error) => {
-    console.log("error occured", error);
-  });
 
 const app = express();
 
