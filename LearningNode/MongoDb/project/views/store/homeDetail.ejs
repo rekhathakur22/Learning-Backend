@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Details</title>
+    <link href="/output.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100 text-gray-800 font-sans">
+    
+  <!-- navigation  -->
+  <%- include('../partials/header')%> 
+
+    <div class="max-w-7xl mx-auto p-8">
+      <!-- Header -->
+      <header class="mb-6">
+        <h1 class="text-4xl font-bold text-blue-700">Home Details</h1>
+        <p class="text-lg text-gray-600 mt-2">Explore more about this property.</p>
+      </header>
+
+      <!-- Home Card -->
+      <div class="bg-white shadow-md rounded-lg overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-6 p-8">
+        <!-- Home Image -->
+        <img
+          src="<%= img %>"
+          alt="Home Image"
+          class="w-full h-48 object-cover rounded-md"
+        />
+
+        <!-- Details Section -->
+        <div class="flex flex-col justify-between space-y-4">
+          <div>
+            <h2 class="text-2xl font-semibold text-blue-600"><%= homename %></h2>
+            <p class="text-sm text-gray-600 mt-2"><%- location %></p>
+            <p class="text-sm text-gray-600">Price: ₹<%-price%>/day</p>
+
+            <p class="text-base text-gray-700 mt-4">
+      <%= description %>
+    </p>
+          </div>
+
+          <!-- Features -->
+          <div class="mt-4 space-y-2">
+            <p class="text-green-700 font-medium">Available</p>
+            <ul class="list-none text-sm space-y-1">
+              <li>✅ Free Wi-Fi</li>
+              <li>✅ 24/7 Security</li>
+              <li>✅ Attached Bathroom</li>
+            </ul>
+          </div>
+
+          <!-- Action Button -->
+          <!-- Book Now Button -->
+<div class="flex items-center">
+  <div>
+    <button
+  class=" px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition duration-300"
+>
+  Book Now
+</button>
+  </div>
+
+<!-- Add to Favourite Button -->
+<div>
+   <%- include('../partials/favouriteButton')%> 
+</div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
