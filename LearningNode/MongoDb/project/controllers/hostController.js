@@ -6,8 +6,7 @@ exports.getAddHome = (req, res) => {
 
 exports.getEditHome = (req, res) => {
   const homeId = req.params.homeId;
-  Home.findById(homeId).then(([homes]) => {
-    const home = homes[0];
+  Home.findById(homeId).then((homes) => {
     if (!home) {
       console.log("Home not found for this id");
       res.redirect("/host/host-home");
@@ -19,7 +18,7 @@ exports.getEditHome = (req, res) => {
 
 exports.getHostHome = (req, res) => {
   Home.fetchAll()
-    .then(([registeredHome]) => {
+    .then((registeredHome) => {
       res.render("host/host-home", { registeredHome });
     })
     .catch((err) => {
@@ -48,7 +47,9 @@ exports.postAddHome = (req, res) => {
     req.body.img,
     req.body.description
   );
-  home.save();
+  home.save().then(() => {
+    console.log("home saved succesfully");
+  });
 
   res.render("host/homeAdded");
 };

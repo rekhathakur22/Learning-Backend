@@ -7,7 +7,7 @@ const express = require("express");
 // Local module
 const userRouter = require("./routes/userRouter");
 const { hostRouter } = require("./routes/hostRouter");
-const mongoConnect = require("./utils/database");
+const { mongoConnect } = require("./utils/database");
 
 const app = express();
 

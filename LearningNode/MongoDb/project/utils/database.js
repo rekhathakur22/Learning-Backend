@@ -9,7 +9,7 @@ let _db;
 const mongoConnect = (callback) => {
   MongoClient.connect(mongoUrl)
     .then((client) => {
-      _db = client.connect("roomly");
+      _db = client.db("roomly");
       callback(client);
     })
     .catch((error) => {
@@ -26,6 +26,6 @@ const getDb = () => {
   return _db;
 };
 
-module.exports = mongoConnect;
+exports.mongoConnect = mongoConnect;
 
-module.getDb = getDb;
+exports.getDb = getDb;

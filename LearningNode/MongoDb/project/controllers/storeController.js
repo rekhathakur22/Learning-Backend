@@ -3,7 +3,7 @@ const Home = require("../models/homes");
 
 exports.getHome = (req, res) => {
   Home.fetchAll()
-    .then(([registeredHome]) => {
+    .then((registeredHome) => {
       res.render("store/landingPage", { registeredHome });
     })
     .catch((err) => {
@@ -20,7 +20,7 @@ exports.getFavourite = (req, res) => {
   Favourite.getFavourite().then(([homeIds]) => {
     const FavRegisteredHome = homeIds.map((favHome) => favHome.home_id);
     Home.fetchAll()
-      .then(([registeredHome]) => {
+      .then((registeredHome) => {
         const favouriteWithDetails = FavRegisteredHome.map((homeId) =>
           registeredHome.find((home) => home.id === homeId)
         );
@@ -47,10 +47,11 @@ exports.postAddFavourite = (req, res) => {
 
 exports.getHomeDetail = (req, res) => {
   const homeId = req.params.homeId;
-  Home.findById(homeId).then(([homes]) => {
-    const home = homes[0];
-
+  console.log(homeId);
+  Home.findById(homeId).then((home) => {
+    console.log(home);
     if (!home) {
+      console.log("home not found");
       res.redirect("/");
     } else {
       res.render("store/homeDetail", {
