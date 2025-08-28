@@ -6,7 +6,7 @@ exports.getAddHome = (req, res) => {
 
 exports.getEditHome = (req, res) => {
   const homeId = req.params.homeId;
-  Home.findById(homeId).then((homes) => {
+  Home.findById(homeId).then((home) => {
     if (!home) {
       console.log("Home not found for this id");
       res.redirect("/host/host-home");
@@ -33,9 +33,12 @@ exports.postDeleteHome = (req, res) => {
 };
 
 exports.postEditHome = (req, res) => {
+  console.log(req.body);
   const { homeId, homename, price, location, img, description } = req.body;
   const home = new Home(homename, price, location, img, description, homeId);
-  home.save();
+  home.save().then((result) => {
+    console.log("postEditHome", result);
+  });
   res.redirect("/host/host-home");
 };
 

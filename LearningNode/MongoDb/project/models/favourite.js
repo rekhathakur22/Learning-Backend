@@ -1,15 +1,29 @@
 /// core modules
-const db = require("../utils/database");
+const { ObjectId } = require("mongodb");
+const { getDb } = require("../utils/database");
 module.exports = class Favourite {
-  static addToFavourite(homeId) {
-    return db.execute("INSERT INTO favorites (home_id) VALUES (?)", [homeId]);
+  constructor(homeId) {
+    this.homeId = homeId;
+  }
+
+  addToFavourite() {
+    const db = getDb();
+
+    return db
+      .collection("favorites")
+      .findOne({ homeId: this.homeId }) // check if already exists
+      .then((existing) => {
+        if (existing) {
+          return { message: "Already in favourites" };
+        }
+        return db.collection("favorites").insertOne(this);
+      });
   }
 
   static getFavourite() {
-    return db.execute("SELECT home_id FROM favorites");
+    const db = getDb();
+    return db.collection("favorites").find().toArray();
   }
 
-  static deleteFavouriteById(homeId) {
-    return db.execute("DELETE FROM favorites WHERE home_id = ?", [homeId]);
-  }
+  static deleteFavouriteById(homeId) {}
 };

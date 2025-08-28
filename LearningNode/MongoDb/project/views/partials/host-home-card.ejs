@@ -6,8 +6,8 @@
           <p class="text-green-700 font-semibold mt-2"><%= home.price%></p>
          <div class="flex mt-3">
            <a href="/" class="bg-blue-600 py-2 text-center  text-white px-15 mx-2">Detail</a>
-           <a href="/host/edit-home/<%= home.id%>" class="bg-blue-600 py-2 text-center  text-white px-15 mx-2">Edit</a>
-           <form action="/host/delete-home/<%= home.id%>" method="POST">
+           <a href="/host/edit-home/<%= home._id%>" class="bg-blue-600 py-2 text-center  text-white px-15 mx-2">Edit</a>
+           <form action="/host/delete-home/<%= home._id%>" method="POST">
             <button type="submit" class="bg-blue-600 py-2 text-center  text-white px-15 mx-2">Delete</button>
            </form>
          </div>

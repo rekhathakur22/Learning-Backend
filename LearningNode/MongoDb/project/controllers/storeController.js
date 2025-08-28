@@ -17,12 +17,12 @@ exports.getBooking = (req, res) => {
 };
 
 exports.getFavourite = (req, res) => {
-  Favourite.getFavourite().then(([homeIds]) => {
-    const FavRegisteredHome = homeIds.map((favHome) => favHome.home_id);
+  Favourite.getFavourite().then((favHomes) => {
+    const FavRegisteredHome = favHomes.map((favHome) => favHome.homeId);
     Home.fetchAll()
       .then((registeredHome) => {
         const favouriteWithDetails = FavRegisteredHome.map((homeId) =>
-          registeredHome.find((home) => home.id === homeId)
+          registeredHome.find((home) => home._id.toString() === homeId)
         );
         res.render("store/favourite", {
           favouriteWithDetails: favouriteWithDetails,
@@ -36,7 +36,11 @@ exports.getFavourite = (req, res) => {
 };
 
 exports.postAddFavourite = (req, res) => {
-  Favourite.addToFavourite(req.body.id)
+  const { id } = req.body;
+
+  const favourite = new Favourite(id);
+  favourite
+    .addToFavourite()
     .then(res.redirect("/favourite"))
     .catch((error) => {
       if (error) {

@@ -21,6 +21,9 @@ app.use(express.static(path.join(__dirname, "public")));
 // parse the body
 app.use(express.urlencoded({ extended: true }));
 
+// handling favicon request
+app.get("/favicon.ico", (req, res) => res.status(204).end());
+
 // user page
 app.use(userRouter);
 
