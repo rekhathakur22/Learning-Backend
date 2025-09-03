@@ -1,6 +1,7 @@
 /// core modules
-const { ObjectId } = require("mongodb");
+
 const { getDb } = require("../utils/database");
+
 module.exports = class Favourite {
   constructor(homeId) {
     this.homeId = homeId;
@@ -8,15 +9,14 @@ module.exports = class Favourite {
 
   addToFavourite() {
     const db = getDb();
-
     return db
       .collection("favorites")
-      .findOne({ homeId: this.homeId }) // check if already exists
-      .then((existing) => {
-        if (existing) {
-          return { message: "Already in favourites" };
+      .findOne({ homeId: this.homeId })
+      .then((result) => {
+        if (!result) {
+          return db.collection("favorites").insertOne(this);
         }
-        return db.collection("favorites").insertOne(this);
+        return Promise.resolve();
       });
   }
 
@@ -25,5 +25,8 @@ module.exports = class Favourite {
     return db.collection("favorites").find().toArray();
   }
 
-  static deleteFavouriteById(homeId) {}
+  static deleteFavouriteById(homeId) {
+    const db = getDb();
+    return db.collection("favorites").deleteOne({ homeId: String(homeId) });
+  }
 };

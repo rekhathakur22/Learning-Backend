@@ -2,7 +2,7 @@ const Favourite = require("../models/favourite");
 const Home = require("../models/homes");
 
 exports.getHome = (req, res) => {
-  Home.fetchAll()
+  Home.find()
     .then((registeredHome) => {
       res.render("store/landingPage", { registeredHome });
     })
@@ -17,9 +17,9 @@ exports.getBooking = (req, res) => {
 };
 
 exports.getFavourite = (req, res) => {
-  Favourite.getFavourite().then((favHomes) => {
-    const FavRegisteredHome = favHomes.map((favHome) => favHome.homeId);
-    Home.fetchAll()
+  Favourite.find().then((favHomes) => {
+    const FavRegisteredHome = favHomes.map((favHome) => favHome.id.toString());
+    Home.find()
       .then((registeredHome) => {
         const favouriteWithDetails = FavRegisteredHome.map((homeId) =>
           registeredHome.find((home) => home._id.toString() === homeId)
@@ -40,10 +40,10 @@ exports.getFavourite = (req, res) => {
 
 exports.postAddFavourite = (req, res) => {
   const { id } = req.body;
+  const favourite = new Favourite({ id });
 
-  const favourite = new Favourite(id);
   favourite
-    .addToFavourite()
+    .save()
     .then(res.redirect("/favourite"))
     .catch((error) => {
       if (error) {
@@ -74,13 +74,15 @@ exports.getHomeDetail = (req, res) => {
 };
 
 exports.deleteFavourite = (req, res) => {
-  const homeId = req.params.homeId;
-  console.log("came to delete home", homeId);
-  Favourite.deleteFavouriteById(homeId)
+  const id = req.params.id;
+  console.log(id);
+  Favourite.findOneAndDelete({ id: id })
     .then(res.redirect("/favourite"))
     .catch((error) => {
       if (error) {
-        console.log("error is occured", error);
+        {
+          console.log("error is occured", error);
+        }
       }
     });
 };

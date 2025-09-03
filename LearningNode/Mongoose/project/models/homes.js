@@ -1,17 +1,18 @@
-const { ObjectId } = require("mongodb");
-const { getDb } = require("../utils/database");
-const Favourite = require("../models/favourite");
-module.exports = class Home {
-  constructor(homename, price, location, img, description, homeId) {
-    this.homename = homename;
-    this.price = price;
-    this.location = location;
-    this.img = img;
-    this.description = description;
-    if (homeId) {
-      this.homeId = homeId; // 👈 ab se hamesha ObjectId store hoga
-    }
-  }
+const mongoose = require("mongoose");
+
+const homeSchema = new mongoose.Schema({
+  homename: { type: String, required: true },
+  price: { type: Number, required: true },
+  location: { type: String, required: true },
+  img: String,
+  description: String,
+});
+
+module.exports = mongoose.model("Home", homeSchema);
+
+/* const { ObjectId } = require("mongodb");
+
+
 
   save() {
     const db = getDb();
@@ -58,3 +59,5 @@ module.exports = class Home {
       .deleteOne({ _id: new ObjectId(String(homeId)) });
   }
 };
+
+*/
