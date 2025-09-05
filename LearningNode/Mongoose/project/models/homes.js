@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Favourite = require("./favourite");
 
 const homeSchema = new mongoose.Schema({
   homename: { type: String, required: true },
@@ -8,56 +9,10 @@ const homeSchema = new mongoose.Schema({
   description: String,
 });
 
+homeSchema.pre("findOneAndDelete", async function (next) {
+  const homeId = this.getQuery()._id;
+  await Favourite.deleteMany({ id: homeId });
+  next();
+});
+
 module.exports = mongoose.model("Home", homeSchema);
-
-/* const { ObjectId } = require("mongodb");
-
-
-
-  save() {
-    const db = getDb();
-    if (this.homeId) {
-      // updated
-      return db.collection("homes").updateOne(
-        { _id: new ObjectId(String(this.homeId)) }, // already ObjectId hai
-        {
-          $set: {
-            homename: this.homename,
-            price: this.price,
-            location: this.location,
-            img: this.img,
-            description: this.description,
-          },
-        }
-      );
-    } else {
-      return db.collection("homes").insertOne(this);
-    }
-  }
-
-  static fetchAll() {
-    const db = getDb();
-    return db.collection("homes").find().toArray();
-  }
-
-  static findById(homeId) {
-    console.log(homeId);
-    const db = getDb();
-    return db
-      .collection("homes")
-      .find({ _id: new ObjectId(String(homeId)) })
-      .next();
-  }
-
-  static deleteById(homeId) {
-    const db = getDb();
-
-    Favourite.deleteFavouriteById(homeId);
-
-    return db
-      .collection("homes")
-      .deleteOne({ _id: new ObjectId(String(homeId)) });
-  }
-};
-
-*/

@@ -29,12 +29,13 @@ exports.getHostHome = (req, res) => {
 
 exports.postDeleteHome = (req, res) => {
   const homeId = req.params.homeId;
-  Home.findByIdAndDelete(homeId).then(res.redirect("/host/host-home"));
+  Home.findByIdAndDelete(homeId).then(() => {
+    res.redirect("/host/host-home");
+  });
 };
 
 exports.postEditHome = (req, res) => {
   const { homeId, homename, price, location, img, description } = req.body;
-  console.log(homeId);
   Home.findById(homeId)
     .then((home) => {
       (home.homename = homename),
@@ -44,7 +45,7 @@ exports.postEditHome = (req, res) => {
         (home.description = description);
 
       home.save().then((result) => {
-        console.log("home updated", result);
+        console.log("home updated");
       });
 
       res.redirect("/host/host-home");
@@ -55,7 +56,6 @@ exports.postEditHome = (req, res) => {
 };
 
 exports.postAddHome = (req, res) => {
-  console.log(req);
   const { homename, price, location, img, description } = req.body;
 
   const home = new Home({
@@ -69,6 +69,5 @@ exports.postAddHome = (req, res) => {
   home.save().then(() => {
     console.log("home saved succesfully");
   });
-
   res.render("host/homeAdded");
 };

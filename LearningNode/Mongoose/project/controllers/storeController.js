@@ -17,25 +17,18 @@ exports.getBooking = (req, res) => {
 };
 
 exports.getFavourite = (req, res) => {
-  Favourite.find().then((favHomes) => {
-    const FavRegisteredHome = favHomes.map((favHome) => favHome.id.toString());
-    Home.find()
-      .then((registeredHome) => {
-        const favouriteWithDetails = FavRegisteredHome.map((homeId) =>
-          registeredHome.find((home) => home._id.toString() === homeId)
-        );
-        const cleaned = favouriteWithDetails.filter(
-          (home) => home !== undefined && home !== null
-        );
-        res.render("store/favourite", {
-          favouriteWithDetails: cleaned,
-        });
-      })
-      .catch((err) => {
-        console.error("Database fetch error:", err);
-        res.status(500).send("Something went wrong while loading homes.");
+  Favourite.find()
+    .populate("id")
+    .then((favHomes) => {
+      const FavRegisteredHome = favHomes.map((favHome) => favHome.id);
+      res.render("store/favourite", {
+        favouriteWithDetails: FavRegisteredHome,
       });
-  });
+    })
+    .catch((err) => {
+      console.error("Database fetch error:", err);
+      res.status(500).send("Something went wrong while loading homes.");
+    });
 };
 
 exports.postAddFavourite = (req, res) => {
@@ -44,7 +37,9 @@ exports.postAddFavourite = (req, res) => {
 
   favourite
     .save()
-    .then(res.redirect("/favourite"))
+    .then(() => {
+      res.redirect("/favourite");
+    })
     .catch((error) => {
       if (error) {
         console.log("error occured", error);
