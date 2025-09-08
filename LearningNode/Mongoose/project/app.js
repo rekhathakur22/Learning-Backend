@@ -7,6 +7,7 @@ const express = require("express");
 // Local module
 const userRouter = require("./routes/userRouter");
 const { hostRouter } = require("./routes/hostRouter");
+const authRouter = require("./routes/authRouter");
 
 const app = express();
 
@@ -23,6 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 // handling favicon request
 app.get("/favicon.ico", (req, res) => res.status(204).end());
 
+// Authetication
+app.use(authRouter);
 // user page
 app.use(userRouter);
 
