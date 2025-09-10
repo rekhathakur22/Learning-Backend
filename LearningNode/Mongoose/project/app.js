@@ -24,17 +24,33 @@ app.use(express.urlencoded({ extended: true }));
 // handling favicon request
 app.get("/favicon.ico", (req, res) => res.status(204).end());
 
+// handling cookies
+app.use((req, res, next) => {
+  req.isLoggedIn = req.get("Cookie")
+    ? req.get("Cookie").split("=")[1] === "true"
+    : false;
+  next();
+});
+
 // Authetication
 app.use(authRouter);
 // user page
 app.use(userRouter);
 
 // url management
+app.use("/host", (req, res, next) => {
+  if (!req.isLoggedIn) {
+    return res.redirect("/login");
+  }
+  next(); // next() will move to next middleware
+});
 app.use("/host", hostRouter);
 
 // erro page middleware
 app.use((req, res, next) => {
-  res.render("errorPage");
+  res.render("errorPage", {
+    isLoggedIn: req.isLoggedIn,
+  });
 });
 
 mongoose

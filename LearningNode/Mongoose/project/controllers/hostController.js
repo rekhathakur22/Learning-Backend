@@ -1,7 +1,9 @@
 const Home = require("../models/homes");
 
 exports.getAddHome = (req, res) => {
-  res.render("host/add-home");
+  res.render("host/add-home", {
+    isLoggedIn: req.isLoggedIn,
+  });
 };
 
 exports.getEditHome = (req, res) => {
@@ -11,7 +13,7 @@ exports.getEditHome = (req, res) => {
       console.log("Home not found for this id");
       res.redirect("/host/host-home");
     } else {
-      res.render("host/edit-home", { home }); //home is single object
+      res.render("host/edit-home", { home, isLoggedIn: req.isLoggedIn }); //home is single object
     }
   });
 };
@@ -19,7 +21,10 @@ exports.getEditHome = (req, res) => {
 exports.getHostHome = (req, res) => {
   Home.find()
     .then((registeredHome) => {
-      res.render("host/host-home", { registeredHome });
+      res.render("host/host-home", {
+        registeredHome,
+        isLoggedIn: req.isLoggedIn,
+      });
     })
     .catch((err) => {
       console.error("Database fetch error:", err);
@@ -69,5 +74,5 @@ exports.postAddHome = (req, res) => {
   home.save().then(() => {
     console.log("home saved succesfully");
   });
-  res.render("host/homeAdded");
+  res.render("host/homeAdded", { isLoggedIn: req.isLoggedIn });
 };

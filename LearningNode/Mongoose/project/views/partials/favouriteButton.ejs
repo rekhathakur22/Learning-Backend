@@ -1,3 +1,4 @@
+<% if(isLoggedIn) { %>
 <form action="/favourite" method="POST">
   <button
   type="submit"
@@ -7,4 +8,5 @@
 </button>
 <input type="hidden" name="id" value="<%= id %>">
 </form>
+<% } %>
 

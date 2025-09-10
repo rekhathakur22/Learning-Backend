@@ -4,7 +4,10 @@ const Home = require("../models/homes");
 exports.getHome = (req, res) => {
   Home.find()
     .then((registeredHome) => {
-      res.render("store/landingPage", { registeredHome });
+      res.render("store/landingPage", {
+        registeredHome,
+        isLoggedIn: req.isLoggedIn,
+      });
     })
     .catch((err) => {
       console.error("Database fetch error:", err);
@@ -13,7 +16,9 @@ exports.getHome = (req, res) => {
 };
 
 exports.getBooking = (req, res) => {
-  res.render("store/booking");
+  res.render("store/booking", {
+    isLoggedIn: req.isLoggedIn,
+  });
 };
 
 exports.getFavourite = (req, res) => {
@@ -23,6 +28,7 @@ exports.getFavourite = (req, res) => {
       const FavRegisteredHome = favHomes.map((favHome) => favHome.id);
       res.render("store/favourite", {
         favouriteWithDetails: FavRegisteredHome,
+        isLoggedIn: req.isLoggedIn,
       });
     })
     .catch((err) => {
@@ -63,6 +69,7 @@ exports.getHomeDetail = (req, res) => {
         location: home.location,
         img: home.img,
         description: home.description,
+        isLoggedIn: req.isLoggedIn,
       });
     }
   });
