@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 
 // external module
 const express = require("express");
+const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
+const DBpath =
+  "mongodb+srv://rekha:SoftEng22%4022@cluster0.ugcugtj.mongodb.net/roomly?retryWrites=true&w=majority&appName=Cluster0";
 
 // Local module
 const userRouter = require("./routes/userRouter");
@@ -23,12 +27,24 @@ app.use(express.urlencoded({ extended: true }));
 
 // handling favicon request
 app.get("/favicon.ico", (req, res) => res.status(204).end());
+// mongodb store
+const store = new MongoDBStore({
+  uri: DBpath,
+  collection: "sessions",
+});
+// handling session
+app.use(
+  session({
+    secret: "SomeRandomSecretKey",
+    resave: false,
+    saveUninitialized: true,
+    store: store,
+  })
+);
 
 // handling cookies
 app.use((req, res, next) => {
-  req.isLoggedIn = req.get("Cookie")
-    ? req.get("Cookie").split("=")[1] === "true"
-    : false;
+  req.isLoggedIn = req.session.isLoggedIn;
   next();
 });
 
@@ -54,9 +70,7 @@ app.use((req, res, next) => {
 });
 
 mongoose
-  .connect(
-    "mongodb+srv://rekha:SoftEng22%4022@cluster0.ugcugtj.mongodb.net/roomly?retryWrites=true&w=majority&appName=Cluster0"
-  )
+  .connect(DBpath)
   .then(() => {
     app.listen(3000);
   })

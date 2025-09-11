@@ -7,11 +7,13 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = (req, res) => {
   console.log(req.body);
-  res.cookie("isLoggedIn", true); // sends the cookie to the browser
+  // res.cookie("isLoggedIn", true); // sends the cookie to the browser
+  req.session.isLoggedIn = true;
   res.redirect("/");
 };
 
 exports.postLogout = (req, res) => {
-  res.clearCookie("isLoggedIn");
-  res.redirect("/");
+  req.session.destroy(() => {
+    res.redirect("/login");
+  });
 };
