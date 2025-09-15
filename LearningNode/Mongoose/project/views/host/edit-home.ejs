@@ -5,71 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit-home</title>
   <link rel="stylesheet" href="/output.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body, input, button, label, h1, h2, h3, span, a {
+      font-family: 'Inter', Arial, sans-serif;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 h-screen flex-col items-center justify-center">
+<body class="bg-gradient-to-br from-blue-100 via-white to-blue-200 min-h-screen flex flex-col">
  
   <!-- navigation bar -->
   <%- include('../partials/header',{ isLoggedIn: isLoggedIn })%>
  
-  <div class="bg-white p-8 w-2/5 mx-auto mt-4">
-
-    <h1 class="text-2xl font-bold text-red-800 text-center mb-6">Edit your home</h1>
-
-    <form action="/host/edit-home" method="POST" class="space-y-4">
+  <div class="bg-white/90 p-8 md:w-2/5 w-full mx-auto mt-10 rounded-2xl shadow-2xl border border-blue-100">
+    <h1 class="text-3xl font-extrabold text-blue-700 text-center mb-8 flex items-center justify-center gap-2">
+      <i class="fas fa-pen-to-square text-blue-500"></i>
+      Edit your home
+    </h1>
+    <form action="/host/edit-home" method="POST" class="space-y-5">
       <input
         type="hidden"
         name="homeId"
         value="<%=home._id%>"
-        placeholder="Enter Home Name"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
       />
 
-      <input
-        type="text"
-        name="homename"
-        value="<%=home.homename%>"
-        placeholder="Enter Home Name"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-      />
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="homename">Home Name</label>
+        <input
+          type="text"
+          id="homename"
+          name="homename"
+          value="<%=home.homename%>"
+          placeholder="Enter Home Name"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+        />
+      </div>
 
-      <input
-        type="number"
-        name="price"
-         value="<%=home.price%>"
-        placeholder="Enter The Price Per Night"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-      />
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="price">Price Per Night</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          value="<%=home.price%>"
+          placeholder="Enter The Price Per Night"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+        />
+      </div>
 
-      <input
-        type="text"
-        name="location"
-         value="<%=home.location%>"
-        placeholder="Enter The Location"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-      />
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="location">Location</label>
+        <input
+          type="text"
+          id="location"
+          name="location"
+          value="<%=home.location%>"
+          placeholder="Enter The Location"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+        />
+      </div>
 
-      <input
-        type="url"
-        name="img"
-        placeholder="Upload picter of your house"
-         value="<%=home.img%>"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-      />
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="img">Image URL</label>
+        <input
+          type="url"
+          id="img"
+          name="img"
+          placeholder="Upload picture of your house"
+          value="<%=home.img%>"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+        />
+      </div>
 
-      <input
-        type="text"
-        name="description"
-         value="<%=home.description%>"
-        placeholder="Enter the detail about your home"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-      />
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Enter the detail about your home"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"
+          rows="3"
+        ><%=home.description%></textarea>
+      </div>
 
       <button
         type="submit"
         value="update"
-        class="w-full bg-red-600 text-white font-semibold py-2 rounded-md hover:bg-red-700 transition duration-300"
+        class="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold py-3 rounded-lg hover:from-blue-600 hover:to-blue-800 transition duration-300 shadow-lg text-lg flex items-center justify-center gap-2"
       >
-      Update
+        <i class="fas fa-save"></i>
+        Update
       </button>
     </form>
   </div>

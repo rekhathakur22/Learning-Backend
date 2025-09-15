@@ -5,18 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Host home list items</title>
   <link rel="stylesheet" href="/output.css">
- 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body, input, button, label, h1, h2, h3, span, a {
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 8px;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-blue-100 via-white to-blue-200 min-h-screen flex flex-col">
   
    <%- include('../partials/header',{ isLoggedIn: isLoggedIn })%> 
 
-  <main id="listings" class="px-6 py-4">
-    <h3 class="text-blue-600 text-2xl font-bold mb-4 text-center">Available Homes</h3>
-    <div class="flex flex-col space-y-4">
+  <main id="listings" class="flex-1 max-w-5xl mx-auto w-full px-4 py-10">
+    <h3 class="text-blue-700 text-3xl font-extrabold mb-8 text-center">
+      My Hosted Homes
+    </h3>
+    <div class="flex flex-col space-y-6">
       <% registeredHome.forEach(home => { %>
-       <%- include('../partials/host-home-card',{ home: home })%> 
-       <% }) %>
+        <%- include('../partials/host-home-card',{ home: home })%> 
+      <% }) %>
     </div>
   </main>
 

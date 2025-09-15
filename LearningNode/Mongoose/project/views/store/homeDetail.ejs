@@ -5,69 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Details</title>
     <link href="/output.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+      body, input, button, label, h1, h2, h3, span, a {
+        font-family: 'Montserrat', Arial, sans-serif;
+      }
+    </style>
   </head>
-  <body class="bg-gray-100 text-gray-800 font-sans">
+  <body class="bg-gradient-to-br from-blue-100 via-white to-blue-200 min-h-screen text-gray-800">
     
   <!-- navigation  -->
   <%- include('../partials/header',{ isLoggedIn: isLoggedIn })%> 
 
-    <div class="max-w-7xl mx-auto p-8">
+    <div class="max-w-5xl mx-auto p-6 md:p-10">
       <!-- Header -->
-      <header class="mb-6">
-        <h1 class="text-4xl font-bold text-blue-700">Home Details</h1>
-        <p class="text-lg text-gray-600 mt-2">Explore more about this property.</p>
+      <header class="mb-8">
+        <h1 class="text-2xl md:text-3xl font-bold text-blue-600 flex items-center gap-2 tracking-wide bg-blue-100 px-4 py-2 rounded-lg shadow-sm w-fit mx-auto">
+          <i class="fas fa-house-user text-blue-400"></i>
+          Home Details
+        </h1>
+        <p class="text-base text-gray-600 mt-2 text-center">Explore more about this property.</p>
       </header>
 
       <!-- Home Card -->
-      <div class="bg-white shadow-md rounded-lg overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-6 p-8">
+      <div class="bg-white/90 shadow-2xl rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-10 border border-blue-100">
         <!-- Home Image -->
-        <img
-          src="<%= img %>"
-          alt="Home Image"
-          class="w-full h-48 object-cover rounded-md"
-        />
+        <div class="flex flex-col gap-4">
+          <img
+            src="<%= img %>"
+            alt="Home Image"
+            class="w-full h-64 md:h-80 object-cover rounded-2xl shadow"
+          />
+          <div class="flex gap-2">
+            <span class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">
+              <i class="fas fa-map-marker-alt mr-1"></i> <%- location %>
+            </span>
+            <span class="inline-flex items-center px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
+              <i class="fas fa-rupee-sign mr-1"></i> ₹<%-price%>/day
+            </span>
+          </div>
+        </div>
 
         <!-- Details Section -->
         <div class="flex flex-col justify-between space-y-4">
           <div>
-            <h2 class="text-2xl font-semibold text-blue-600"><%= homename %></h2>
-            <p class="text-sm text-gray-600 mt-2"><%- location %></p>
-            <p class="text-sm text-gray-600">Price: ₹<%-price%>/day</p>
-
-            <p class="text-base text-gray-700 mt-4">
-      <%= description %>
-    </p>
+            <h2 class="text-xl font-semibold text-blue-700 mb-2"><%= homename %></h2>
+            <p class="text-base text-gray-700 mb-4">
+              <%= description %>
+            </p>
           </div>
 
           <!-- Features -->
-          <div class="mt-4 space-y-2">
-            <p class="text-green-700 font-medium">Available</p>
+          <div class="mt-2 space-y-2">
+            <span class="inline-flex items-center px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold mb-2">
+              <i class="fas fa-check-circle mr-1"></i> Available
+            </span>
             <ul class="list-none text-sm space-y-1">
-              <li>✅ Free Wi-Fi</li>
-              <li>✅ 24/7 Security</li>
-              <li>✅ Attached Bathroom</li>
+              <li class="flex items-center gap-2"><i class="fas fa-wifi text-blue-400"></i> Free Wi-Fi</li>
+              <li class="flex items-center gap-2"><i class="fas fa-shield-alt text-blue-400"></i> 24/7 Security</li>
+              <li class="flex items-center gap-2"><i class="fas fa-bath text-blue-400"></i> Attached Bathroom</li>
             </ul>
           </div>
 
           <!-- Action Button -->
-          <!-- Book Now Button -->
-<div class="flex items-center">
-  <div>
-    <button
-  class=" px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition duration-300"
->
-  Book Now
-</button>
-  </div>
-
-<!-- Add to Favourite Button -->
-<div>
-   <%- include('../partials/favouriteButton')%> 
-</div>
-</div>
-
-
-
+          <div class="flex flex-col sm:flex-row items-center gap-4 mt-6">
+            <button
+              class="px-6 py-2 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg shadow-md text-base transition duration-300 border-2 border-blue-500 hover:border-blue-700"
+              style="letter-spacing: 0.5px;"
+            >
+              Book Now
+            </button>
+            <div>
+              <%- include('../partials/favouriteButton')%> 
+            </div>
+          </div>
         </div>
       </div>
     </div>
